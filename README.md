@@ -1,4 +1,4 @@
-# Chen
+# Stephen Shore
 
 [Open my portfolio](https://nightangelflowerwin-ops.github.io/)
 
