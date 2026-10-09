@@ -1,0 +1,57 @@
+name: Profile and portfolio checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 16 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  check-profile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Check profile README and public links
+        shell: python
+        run: |
+          import os
+          import re
+          import time
+          from pathlib import Path
+          from urllib.request import Request, urlopen
+          text = Path("README.md").read_text(encoding="utf-8")
+          visible = re.sub(r"<!--.*?(?:-->|\Z)", "", text, flags=re.S)
+          if not re.search(r"^#\s+\S", visible, flags=re.M):
+              raise SystemExit("README.md needs a visible profile heading.")
+          links = sorted(set(re.findall(r"\]\((https?://[^\s)]+)\)", visible)))
+          if not links:
+              raise SystemExit("README.md needs a public project or portfolio link.")
+          failures = []
+          for link in links:
+              for attempt in range(3):
+                  try:
+                      request = Request(link, headers={"User-Agent": "GitHub-Profile-Link-Check"})
+                      with urlopen(request, timeout=20) as response:
+                          print(f"PASS {response.status}: {link}")
+                      break
+                  except Exception as error:
+                      if attempt == 2:
+                          failures.append(f"{link}: {error}")
+                      else:
+                          time.sleep(3)
+          Path(os.environ["GITHUB_STEP_SUMMARY"]).write_text(
+              "## Profile and portfolio checks\n\n"
+              + f"Checked {len(links)} public link(s) from README.md.\n\n"
+              + ("\n".join(failures) if failures else "All checks passed.\n"),
+              encoding="utf-8",
+          )
+          if failures:
+              raise SystemExit("\n".join(failures))
