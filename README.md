@@ -8,7 +8,7 @@ Explore my public projects, live tools and source code.
 
 [**InferenceLab: serving, cache routing and GPU optimization**](https://github.com/nightangelflowerwin-ops/InferenceLab)
 
-Building a 15-project inference infrastructure portfolio. Published implementations include vLLM tuning, prefix routing, a durable token queue and local autoscaler, trace profilers, isolated fault recovery and CPU-memory weight streaming. Automated correctness checks run on Windows and Linux. GPU benchmarks remain pending; every project lists its evidence and remaining work.
+Building a 15-project inference infrastructure portfolio. Published work includes serving and routing proxies, semantic-cache adapters, token-queue autoscaling, trace profilers, CPU fault recovery and weight streaming, plus RMSNorm and speculative-sampling references. Automated checks run on Windows and Linux, with a separate real Redis/Qdrant integration test. GPU execution and benchmarks remain pending; every project lists its evidence and remaining work.
 
 [Explore the implementations and roadmap](https://github.com/nightangelflowerwin-ops/InferenceLab/blob/main/ROADMAP.md)
 
