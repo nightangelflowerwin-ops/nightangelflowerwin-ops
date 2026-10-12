@@ -12,6 +12,10 @@ Building a 15-project inference infrastructure portfolio. Published work include
 
 [Explore the implementations and roadmap](https://github.com/nightangelflowerwin-ops/InferenceLab/blob/main/ROADMAP.md)
 
+[**Relay: reliable jobs with a live dashboard**](https://github.com/nightangelflowerwin-ops/InferenceLab/tree/main/projects/16-reliable-job-runner)
+
+A laptop-only text job runner with separate worker processes, durable leases, downloadable reports and demonstrated worker-crash recovery. Single-host prototype; no multi-machine availability claim.
+
 ## milady
 
 <!--
