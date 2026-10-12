@@ -24,3 +24,7 @@ A laptop-only text job runner with separate worker processes, durable leases, do
 
 
 -
+
+## Em Dash Remover
+
+[Open-source repository punctuation cleanup](https://github.com/nightangelflowerwin-ops/em-dash-remover): MIT-licensed CLI and GitHub Action that checks text or proposes a reviewable cleanup pull request. Windows and Linux CI verified.
